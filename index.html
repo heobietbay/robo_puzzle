@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Robo puzzle</title>
+</head>
+
+<body>
+    <canvas id="board" width="540" height="360"></canvas>
+    <img id="blackTile" width="45" height="45" src="images/black_tile.png" style="visibility:hidden">
+    <img id="robo" width="45" height="45" src="images/arrow_right.png" style="visibility:hidden">
+    <img id="robo_l" width="45" height="45" src="images/arrow_left.png" style="visibility:hidden">
+    <img id="robo_d" width="45" height="45" src="images/arrow_down.png" style="visibility:hidden">
+    <img id="robo_u" width="45" height="45" src="images/arrow_up.png" style="visibility:hidden">
+    <img id="star" width="45" height="45" src="images/star.png" style="visibility:hidden">
+    <p>
+        <div id="control">
+            <input type="button" name="move" value="Move" onclick="robo.move()" />
+            <input type="button" name="left" value="Turn Left" onclick="robo.turnLeft()" />
+            <input type="button" name="right" value="Turn Right" onclick="robo.turnRight()" />
+        </div>
+    </p>
+    <script type="text/javascript" src="scripts/data.js"></script>
+    <script type="text/javascript" src="scripts/robo.js"></script>
+    <script type="text/javascript" src="scripts/boardmanager.js"></script>
+    <script type="text/javascript">
+    var roboImgs = {
+        right: document.getElementById("robo"),
+        left: document.getElementById("robo_l"),
+        down: document.getElementById("robo_d"),
+        up: document.getElementById("robo_u")
+    };
+    var robo = new Robo(startPos = { x: 7, y: 4 });
+
+    var starImg = document.getElementById("star");
+
+    var mainBoard = document.getElementById('board');
+    var boardManager = new BoardManager(mainBoard,MATRIX,STARS_LOCATION);
+
+    window.onload = function() {
+        boardManager.init();
+        boardManager.drawStarList(starImg);
+        boardManager.handleRobotMove(robo,roboImgs);
+    };
+    // refresh every 30 mil sec
+    var gameIntervalId = window.setInterval(() => window.requestAnimationFrame(function() {
+    	boardManager.clearCanvas();
+        boardManager.init();
+        boardManager.drawStarList(starImg);
+        boardManager.handleRobotMove(robo,roboImgs);
+    }), 30);
+
+    var checkIntervalId = window.setInterval(() => {
+    	if(boardManager.gameOver()){
+    		window.clearInterval(gameIntervalId);
+    		window.clearInterval(checkIntervalId);
+    		alert("Game over ^^");
+    	}
+    }, 1000);
+
+
+    </script>
+</body>
+
+</html>
