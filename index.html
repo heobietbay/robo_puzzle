@@ -6,20 +6,43 @@
 </head>
 
 <body>
-    <canvas id="board" width="540" height="360"></canvas>
-    <img id="blackTile" width="45" height="45" src="images/black_tile.png" style="visibility:hidden">
-    <img id="robo" width="45" height="45" src="images/arrow_right.png" style="visibility:hidden">
-    <img id="robo_l" width="45" height="45" src="images/arrow_left.png" style="visibility:hidden">
-    <img id="robo_d" width="45" height="45" src="images/arrow_down.png" style="visibility:hidden">
-    <img id="robo_u" width="45" height="45" src="images/arrow_up.png" style="visibility:hidden">
-    <img id="star" width="45" height="45" src="images/star.png" style="visibility:hidden">
-    <p>
-        <div id="control">
-            <input type="button" name="move" value="Move" onclick="robo.move()" />
-            <input type="button" name="left" value="Turn Left" onclick="robo.turnLeft()" />
-            <input type="button" name="right" value="Turn Right" onclick="robo.turnRight()" />
+    <div style="width:100%">
+        <img id="blackTile" width="45" height="45" src="images/black_tile.png" style="visibility:hidden" />
+        <img id="robo" width="45" height="45" src="images/arrow_right.png" style="visibility:hidden" />
+        <img id="robo_l" width="45" height="45" src="images/arrow_left.png" style="visibility:hidden" />
+        <img id="robo_d" width="45" height="45" src="images/arrow_down.png" style="visibility:hidden" />
+        <img id="robo_u" width="45" height="45" src="images/arrow_up.png" style="visibility:hidden" />
+        <img id="star" width="45" height="45" src="images/star.png" style="visibility:hidden" />
+    </div>
+    <div style="width:60%;display: inline-block;">
+        <canvas id="board" width="540" height="360"></canvas>
+        <p>
+            <div id="control">
+                <input type="button" name="move" value="Move" onclick="robo.move()" />
+                <input type="button" name="left" value="Turn Left" onclick="robo.turnLeft()" />
+                <input type="button" name="right" value="Turn Right" onclick="robo.turnRight()" />
+            </div>
+        </p>
+    </div>
+    <div style="width:35%;display: inline-block; position: relative; bottom: 360px">
+        <div style="width:60%">
+            <span style="font-size: 36px">F1</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>            
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
+            <img width="32" height="32" src="images/black_tile.png"/>
         </div>
-    </p>
+        <div style="width: 35%; float: right; padding-right: 100px; position: relative; bottom: 36px">
+            <img id="turn_l" src="images/turn_left.png"  width="28" height="28" style="float: inherit; clear: right" />
+            <img id="turn_r" src="images/turn_right.png" width="28" height="28" style="float: inherit; clear: right" />
+            <img id="f1" src="images/f1.png" width="28" height="28" style="float: inherit; clear: right" />
+            <img id="f2" src="images/f2.png" width="28" height="28" style="float: inherit; clear: right" />
+        </div>
+    </div>
     <script type="text/javascript" src="scripts/data.js"></script>
     <script type="text/javascript" src="scripts/robo.js"></script>
     <script type="text/javascript" src="scripts/boardmanager.js"></script>
@@ -35,30 +58,28 @@
     var starImg = document.getElementById("star");
 
     var mainBoard = document.getElementById('board');
-    var boardManager = new BoardManager(mainBoard,MATRIX,STARS_LOCATION);
+    var boardManager = new BoardManager(mainBoard, MATRIX, STARS_LOCATION);
 
     window.onload = function() {
         boardManager.init();
         boardManager.drawStarList(starImg);
-        boardManager.handleRobotMove(robo,roboImgs);
+        boardManager.handleRobotMove(robo, roboImgs);
     };
     // refresh every 30 mil sec
     var gameIntervalId = window.setInterval(() => window.requestAnimationFrame(function() {
-    	boardManager.clearCanvas();
+        boardManager.clearCanvas();
         boardManager.init();
         boardManager.drawStarList(starImg);
-        boardManager.handleRobotMove(robo,roboImgs);
+        boardManager.handleRobotMove(robo, roboImgs);
     }), 30);
 
     var checkIntervalId = window.setInterval(() => {
-    	if(boardManager.gameOver()){
-    		window.clearInterval(gameIntervalId);
-    		window.clearInterval(checkIntervalId);
-    		alert("Game over ^^");
-    	}
+        if (boardManager.gameOver()) {
+            window.clearInterval(gameIntervalId);
+            window.clearInterval(checkIntervalId);
+            alert("Game over ^^");
+        }
     }, 1000);
-
-
     </script>
 </body>
 
