@@ -1,0 +1,38 @@
+#hiddenImgs {
+    width: 100%;
+}
+
+#hiddenImgs img {
+    width: 45px;
+    height: 45px;
+    visibility: hidden;
+}
+
+#controlDiv {
+    width: 60%;
+    display: inline-block;
+}
+
+#commandDiv {
+    width: 35%;
+    display: inline-block;
+    position: relative;
+    bottom: 360px
+}
+
+#commandListDiv {
+    width: 60%
+}
+
+#commandListDiv img {
+    width: 32px;
+    height: 32px;
+}
+
+
+.commandImgTile {
+    float: inherit;
+    clear: right;
+    width: 28px;
+    height: 28px;
+}
