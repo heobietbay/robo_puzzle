@@ -3,18 +3,19 @@
 
 <head>
     <title>Robo puzzle</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div style="width:100%">
-        <img id="blackTile" width="45" height="45" src="images/black_tile.png" style="visibility:hidden" />
-        <img id="robo" width="45" height="45" src="images/arrow_right.png" style="visibility:hidden" />
-        <img id="robo_l" width="45" height="45" src="images/arrow_left.png" style="visibility:hidden" />
-        <img id="robo_d" width="45" height="45" src="images/arrow_down.png" style="visibility:hidden" />
-        <img id="robo_u" width="45" height="45" src="images/arrow_up.png" style="visibility:hidden" />
-        <img id="star" width="45" height="45" src="images/star.png" style="visibility:hidden" />
+    <div id='hiddenImgs'>
+        <img id="blackTile" src="images/black_tile.png" />
+        <img id="robo" src="images/arrow_right.png" />
+        <img id="robo_l" src="images/arrow_left.png" />
+        <img id="robo_d" src="images/arrow_down.png" />
+        <img id="robo_u" src="images/arrow_up.png" />
+        <img id="star" src="images/star.png" />
     </div>
-    <div style="width:60%;display: inline-block;">
+    <div id='controlDiv'>
         <canvas id="board" width="540" height="360"></canvas>
         <p>
             <div id="control">
@@ -24,29 +25,45 @@
             </div>
         </p>
     </div>
-    <div style="width:35%;display: inline-block; position: relative; bottom: 360px">
-        <div style="width:60%">
+    <div id='commandDiv'>
+        <div id='commandListDiv'>
             <span style="font-size: 36px">F1</span>
-            <span>&nbsp;&nbsp;&nbsp;</span>            
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
-            <img width="32" height="32" src="images/black_tile.png"/>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <img src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)" />
+            <img src="images/black_tile.png" />
+            <img src="images/black_tile.png" />
+            <img src="images/black_tile.png" />
+            <img src="images/black_tile.png" />
+            <img src="images/black_tile.png" />
+            <img src="images/black_tile.png" />
         </div>
         <div style="width: 35%; float: right; padding-right: 100px; position: relative; bottom: 36px">
-            <img id="turn_l" src="images/turn_left.png"  width="28" height="28" style="float: inherit; clear: right" />
-            <img id="turn_r" src="images/turn_right.png" width="28" height="28" style="float: inherit; clear: right" />
-            <img id="f1" src="images/f1.png" width="28" height="28" style="float: inherit; clear: right" />
-            <img id="f2" src="images/f2.png" width="28" height="28" style="float: inherit; clear: right" />
+            <img id="turn_l" src="images/turn_left.png" draggable="true" ondragstart="dragStartHandler(event,this);" class="commandImgTile" />
+            <img id="turn_r" src="images/turn_right.png" class="commandImgTile" />
+            <img id="f1" src="images/f1.png" class="commandImgTile" />
+            <img id="f2" src="images/f2.png" class="commandImgTile" />
         </div>
     </div>
     <script type="text/javascript" src="scripts/data.js"></script>
     <script type="text/javascript" src="scripts/robo.js"></script>
     <script type="text/javascript" src="scripts/boardmanager.js"></script>
     <script type="text/javascript">
+
+    	
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function onCommandDrop(ev) {
+        ev.preventDefault();
+        var imgUrl = ev.dataTransfer.getData("text");
+        ev.target.src = imgUrl;
+    }
+
+    function dragStartHandler(ev, img) {
+        // TODO: do I really need to handle this?
+    }
+
     var roboImgs = {
         right: document.getElementById("robo"),
         left: document.getElementById("robo_l"),
