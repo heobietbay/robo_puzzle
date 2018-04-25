@@ -1,8 +1,10 @@
 var COMMANDS = COMMANDS || {};
 
-COMMANDS.turnLeft = {};
-COMMANDS.turnRight = {};
-COMMANDS.move = {};
+COMMANDS.turnLeft = { name :"TurnLeft" };
+COMMANDS.turnRight = { name :"TurnRight" };
+COMMANDS.move = { name :"Move" };
+COMMANDS.f1 = { name :"F1" };
+COMMANDS.f2 = { name :"F2" };
 
 var MATRIX = [[0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
               [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],

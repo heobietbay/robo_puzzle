@@ -11,14 +11,6 @@ function Robo(startPos,direction)
 	this.direction = direction || DIRECTION.RIGHT;
 };
 
-Robo.prototype.executeCommandList = function(cmdlist){
-	if(!cmdlist || cmdlist.length == 0)
-		return;
-	cmdlist.forEach(function(cmd){
-		this.execute(cmd);
-	});
-}
-
 Robo.prototype.execute = function(cmd)
 {
 	if(cmd == COMMANDS.turnLeft)

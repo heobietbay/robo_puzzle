@@ -17,11 +17,11 @@
     width: 35%;
     display: inline-block;
     position: relative;
-    bottom: 360px
+    bottom: 324px;
 }
 
 #commandListDiv {
-    width: 60%
+    width: 64%
 }
 
 #commandListDiv img {
@@ -29,6 +29,13 @@
     height: 32px;
 }
 
+#cmdPalleteDiv {
+    width: 35%;
+    float: right;
+    padding-right: 64px;
+    position: relative;
+    bottom: 100px;
+}
 
 .commandImgTile {
     float: inherit;

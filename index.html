@@ -19,9 +19,9 @@
         <canvas id="board" width="540" height="360"></canvas>
         <p>
             <div id="control">
-                <input type="button" name="move" value="Move" onclick="robo.move()" />
-                <input type="button" name="left" value="Turn Left" onclick="robo.turnLeft()" />
-                <input type="button" name="right" value="Turn Right" onclick="robo.turnRight()" />
+                <input type="button" name="move" value="Move" onclick="onMoveClick()" />
+                <input type="button" name="left" value="Turn Left" onclick="onTurnLeftClick()" />
+                <input type="button" name="right" value="Turn Right" onclick="onTurnRightClick()" />
             </div>
         </p>
     </div>
@@ -29,75 +29,30 @@
         <div id='commandListDiv'>
             <span style="font-size: 36px">F1</span>
             <span>&nbsp;&nbsp;&nbsp;</span>
-            <img src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)" />
-            <img src="images/black_tile.png" />
-            <img src="images/black_tile.png" />
-            <img src="images/black_tile.png" />
-            <img src="images/black_tile.png" />
-            <img src="images/black_tile.png" />
-            <img src="images/black_tile.png" />
+            <img id='udCmd0' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)" />
+            <img id='udCmd1' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <img id='udCmd2' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <img id='udCmd3' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <img id='udCmd4' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <img id='udCmd5' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <img id='udCmd6' src="images/black_tile.png" ondrop="onCommandDrop(event)" ondragover="allowDrop(event)"  />
+            <p>
+                <input type="button" name="right" value="Execute" onclick="buildThenExecuteCmds()" />
+            </p>
         </div>
-        <div style="width: 35%; float: right; padding-right: 100px; position: relative; bottom: 36px">
-            <img id="turn_l" src="images/turn_left.png" draggable="true" ondragstart="dragStartHandler(event,this);" class="commandImgTile" />
-            <img id="turn_r" src="images/turn_right.png" class="commandImgTile" />
-            <img id="f1" src="images/f1.png" class="commandImgTile" />
-            <img id="f2" src="images/f2.png" class="commandImgTile" />
+        <div id='cmdPalleteDiv'>
+            <img id="turn_l" src="images/turn_left.png" ondragstart="dragStartHandler(event,COMMANDS.turnLeft);" class="commandImgTile" />
+            <img id="turn_r" src="images/turn_right.png" ondragstart="dragStartHandler(event,COMMANDS.turnRight);" class="commandImgTile" />
+            <img id="move" src="images/forward.png" ondragstart="dragStartHandler(event,COMMANDS.move);" class="commandImgTile" />
+            <img id="f1" src="images/f1.png" ondragstart="dragStartHandler(event,COMMANDS.f1);" class="commandImgTile" />
+            <img id="f2" src="images/f2.png" ondragstart="dragStartHandler(event,COMMANDS.f2);" class="commandImgTile" />
         </div>
     </div>
     <script type="text/javascript" src="scripts/data.js"></script>
     <script type="text/javascript" src="scripts/robo.js"></script>
     <script type="text/javascript" src="scripts/boardmanager.js"></script>
-    <script type="text/javascript">
-
-    	
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function onCommandDrop(ev) {
-        ev.preventDefault();
-        var imgUrl = ev.dataTransfer.getData("text");
-        ev.target.src = imgUrl;
-    }
-
-    function dragStartHandler(ev, img) {
-        // TODO: do I really need to handle this?
-    }
-
-    var roboImgs = {
-        right: document.getElementById("robo"),
-        left: document.getElementById("robo_l"),
-        down: document.getElementById("robo_d"),
-        up: document.getElementById("robo_u")
-    };
-    var robo = new Robo(startPos = { x: 7, y: 4 });
-
-    var starImg = document.getElementById("star");
-
-    var mainBoard = document.getElementById('board');
-    var boardManager = new BoardManager(mainBoard, MATRIX, STARS_LOCATION);
-
-    window.onload = function() {
-        boardManager.init();
-        boardManager.drawStarList(starImg);
-        boardManager.handleRobotMove(robo, roboImgs);
-    };
-    // refresh every 30 mil sec
-    var gameIntervalId = window.setInterval(() => window.requestAnimationFrame(function() {
-        boardManager.clearCanvas();
-        boardManager.init();
-        boardManager.drawStarList(starImg);
-        boardManager.handleRobotMove(robo, roboImgs);
-    }), 30);
-
-    var checkIntervalId = window.setInterval(() => {
-        if (boardManager.gameOver()) {
-            window.clearInterval(gameIntervalId);
-            window.clearInterval(checkIntervalId);
-            alert("Game over ^^");
-        }
-    }, 1000);
-    </script>
+    <script type="text/javascript" src="scripts/objectEventsHandler.js"></script>
+    <script type="text/javascript" src="scripts/game.js"></script>
 </body>
 
 </html>
