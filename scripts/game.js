@@ -30,7 +30,7 @@
                 window.clearInterval(checkIntervalId);
                 alert("Game over ^^");
             }
-        }, 1000);
+        }, 200);
 
         function buildThenExecuteCmds() {
             var userDefinedCmds = buildCmdList();
@@ -46,8 +46,15 @@
         {
             userDefinedCmds.forEach(function (cmd,idx){
                 setTimeout(function(){ 
-                    robo.execute(cmd);
-                }, 30 + 150* idx); // a delay, so we can see that robo do each step
+                    if(cmd != COMMANDS.f1)
+                    {
+                       robo.execute(cmd);
+                    }
+                    else
+                    {
+                       executeCmdOnRobot(userDefinedCmds);
+                    }
+                }, 250* idx); // a delay, so we can see that robo do each step
             });
         }
 
