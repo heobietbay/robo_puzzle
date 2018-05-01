@@ -16,4 +16,6 @@ var MATRIX = [[0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
               [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0]];
 
 
-var STARS_LOCATION = [{x:3,y:4},{x:1,y:4},{x:5,y:4}];
+var STARS_LOCATION = [{x:3,y:4},{x:1,y:4},{x:11,y:0}];
+
+var ROBO_LOCATION = { x: 7, y: 4 };

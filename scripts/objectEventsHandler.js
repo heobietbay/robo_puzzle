@@ -29,3 +29,6 @@
         function onTurnRightClick() {
             robo.turnRight();
         };
+        function onFindStarClick(){
+            makeRoboFindAllStars();
+        }

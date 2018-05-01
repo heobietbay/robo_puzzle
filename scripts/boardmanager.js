@@ -1,11 +1,7 @@
 function BoardManager(board, matrix, starsLocation) {
     this.ctx = board.getContext('2d');
-    this.matrix = matrix; // this is fixed, so no need to clone
-
-    // clone it, by doing a dump filter
-    this.starsLocation = starsLocation.filter(function(pos) {
-        return true;
-    });
+    this.matrix = matrix; 
+    this.starsLocation = starsLocation;
 }
 
 BoardManager.prototype.init = function() {
@@ -51,6 +47,7 @@ BoardManager.prototype.handleRobotMove = function(roboInfo, imgs) {
     var imgToDraw = getCurrentImg(roboInfo, imgs);
     this.ctx.drawImage(imgToDraw, 45 * roboInfo.pos.x, 45 * roboInfo.pos.y);
 };
+
 
 function createImage() {
     /*var image = new Image(50, 50);

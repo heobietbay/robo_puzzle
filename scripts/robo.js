@@ -1,9 +1,9 @@
 var DIRECTION = DIRECTION || {};
 
-DIRECTION.LEFT = {};
-DIRECTION.RIGHT = {};
-DIRECTION.UP = {};
-DIRECTION.DOWN = {};
+DIRECTION.LEFT = { val: 0 };
+DIRECTION.UP = {val: 1};
+DIRECTION.RIGHT = {val: 2};
+DIRECTION.DOWN = {val: 3};
 
 function Robo(startPos,direction)
 {
@@ -28,7 +28,6 @@ Robo.prototype.execute = function(cmd)
 };
 
 Robo.prototype.move = function(){
-
 	if(this.direction == DIRECTION.LEFT)
 	{
 		this.pos.x--;
@@ -45,8 +44,8 @@ Robo.prototype.move = function(){
 	{
 		this.pos.y++;
 	}	
-
 };
+
 Robo.prototype.turnLeft = function(){
 
 	if(this.direction == DIRECTION.LEFT)
